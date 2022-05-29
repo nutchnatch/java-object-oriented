@@ -3,7 +3,7 @@ package com.imutable.objects;
 import java.lang.Override;
 import java.math.BigDecimal;
 
-public class Currency implements Comparable<Currency>{
+public final class Currency implements Comparable<Currency>{ // final - guarantees that instanceof on equals, reference the same object
 
     private String symbol;
 
@@ -25,5 +25,15 @@ public class Currency implements Comparable<Currency>{
         return "Currency{" +
                 "symbol='" + symbol + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object other) {
+//        return other instanceof Currency && this.equals((Currency)other);
+        return other != null && other.getClass() == this.getClass() && this.equals((Currency)other);
+    }
+
+    private boolean equals (Currency other) {
+        return this.symbol.equals(other.symbol);
     }
 }

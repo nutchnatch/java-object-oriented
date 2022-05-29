@@ -20,6 +20,13 @@ public class Money implements Comparable<Money>{
         return new Money(this.amount.multiply(new BigDecimal(factor)), this.currency);
     }
 
+    public Money add(Money other) {
+        if(other.currency.compareTo(this.currency) != 0) {
+            throw new IllegalArgumentException();
+        }
+        return new Money(this.amount.add(other.amount), this.currency);
+    }
+
     private int compareAmountTo(int currencyCompare, Money other) {
         return currencyCompare == 0 ? this.amount.compareTo(other.amount) : currencyCompare;
     }
@@ -35,5 +42,15 @@ public class Money implements Comparable<Money>{
                 "amount=" + amount +
                 ", currency=" + currency +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object other) {
+//        return other instanceof Money && this.equals((Money)other); // instance of will not guarantee the same instance of classes, when using inheritance
+        return other != null && other.getClass() == this.getClass() && this.equals((Money)other); // other.getClass() == this.getClass() solves the problem above
+    }
+
+    private boolean equals (Money other) {
+        return this.amount.equals(other.amount) && this.currency.equals(other.currency);
     }
 }
