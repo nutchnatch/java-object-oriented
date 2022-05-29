@@ -2,7 +2,6 @@ package com.oriented.branching.accountstates;
 
 import com.oriented.branching.AccountState;
 import com.oriented.branching.AccountUnfrozen;
-import com.oriented.branching.accountstates.Active;
 
 import java.math.BigDecimal;
 import java.util.function.Consumer;
