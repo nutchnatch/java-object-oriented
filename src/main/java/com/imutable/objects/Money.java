@@ -53,4 +53,9 @@ public class Money implements Comparable<Money>{
     private boolean equals (Money other) {
         return this.amount.equals(other.amount) && this.currency.equals(other.currency);
     }
+
+    @Override
+    public int hashCode() {
+        return this.amount.hashCode() * 17 + this.currency.hashCode();
+    }
 }

@@ -36,4 +36,9 @@ public final class Currency implements Comparable<Currency>{ // final - guarante
     private boolean equals (Currency other) {
         return this.symbol.equals(other.symbol);
     }
+
+    @Override
+    public int hashCode() {
+        return this.symbol.hashCode();
+    }
 }
