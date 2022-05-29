@@ -1,5 +1,9 @@
 package com.nullchecks;
 
+/**
+ * This class encapsulates a FSM(Finite State Machine) which represents the states trough which it can pass
+ * So we can encapsulate the logic without depending on conditional usage of our interface
+ */
 public class Article {
 
     private Warranty moneyBackGuarantee;
