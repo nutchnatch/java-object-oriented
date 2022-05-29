@@ -1,6 +1,8 @@
 package com.nullchecks;
 
 import java.time.LocalDate;
+import java.lang.Override;
+import java.lang.Runnable;
 
 /**
  * Null object Pattern
@@ -11,13 +13,23 @@ import java.time.LocalDate;
  * Non-Void methods returns constants (false, zero,empty string ...)
  */
 public class VoidWarranty implements Warranty {
+
+//    @Override
+//    public boolean isValidOn(LocalDate date) {
+//        return false;
+//    }
+
+    /**
+     * Do nothing for this operation
+     * @param action
+     */
     @Override
-    public Warranty on(LocalDate date) {
-        return null;
+    public void claim(Runnable action) {
+
     }
 
     @Override
-    public boolean isValidOn(LocalDate date) {
-        return false;
+    public Warranty on(LocalDate date) {
+        return this;
     }
 }

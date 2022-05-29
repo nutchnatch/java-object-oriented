@@ -26,23 +26,34 @@ public class Demo {
         LocalDate today = LocalDate.now();
 
         // branching over boolean flags and null checks are poor programming technics and it is not object oriented programming
-        if(
-//                isGooDCondition && isNonOperational &&
-//                article.getMoneyBackGuarantee() != null &&
-                // isValidOn should return an object, a non-null result
-                article.getMoneyBackGuarantee().isValidOn(today)) {
-            System.out.println("Offer money back");
-        }
+//        if(
+////                isGooDCondition && isNonOperational &&
+////                article.getMoneyBackGuarantee() != null &&
+//                // isValidOn should return an object, a non-null result
+//                article.getMoneyBackGuarantee().isValidOn(today)) { // We are still depending on a if check. Warranty interface, must be improved
+//            System.out.println("Offer money back");
+//        }
+        article.getMoneyBackGuarantee().on(today).claim(this::offerMoneyBack);
 
-        if(
-//                isNonOperational &&
-//                article.getMoneyBackGuarantee() != null &&
-                article.getExpressWarranty().isValidOn(today)) {
-            System.out.println("Offer repair");
-        }
+//        if(
+////                isNonOperational &&
+////                article.getMoneyBackGuarantee() != null &&
+//                article.getExpressWarranty().isValidOn(today)) { // we are still depending on a if check. Warranty interface, must be improved
+//            System.out.println("Offer repair");
+//        }
+        article.getExpressWarranty().on(today).claim(this::offerRepair);
 
         System.out.println("-----------------");
     }
+
+    private void offerMoneyBack() {
+        System.out.println("Offer money back");
+    }
+
+    private void offerRepair() {
+        System.out.println("Offer repair");
+    }
+
 
     public void run() {
         LocalDate sellingDate = LocalDate.now().minus(40, ChronoUnit.DAYS);
@@ -55,7 +66,7 @@ public class Demo {
         // Replace nulls with proper objects
         // Implements the expected interface
         // Provide replacement behavior in methods
-        Article item2 = new Article(VoidWarranty.VOID, VoidWarranty.VOID);
+        Article item2 = new Article(VoidWarranty.VOID, Warranty.lifetime(sellingDate));
         this.claimWarranty(item2);
     }
 }
