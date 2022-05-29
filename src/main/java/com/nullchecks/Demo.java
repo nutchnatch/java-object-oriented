@@ -57,16 +57,21 @@ public class Demo {
 
     public void run() {
         LocalDate sellingDate = LocalDate.now().minus(40, ChronoUnit.DAYS);
-        Warranty moneyBack1 = new TimeLimitWarranty(sellingDate, Duration.ofDays(30));
+//        Warranty moneyBack1 = new TimeLimitWarranty(sellingDate, Duration.ofDays(30));
+        Warranty moneyBack1 = new TimeLimitWarranty(sellingDate, Duration.ofDays(60));
         Warranty warranty1 = new TimeLimitWarranty(sellingDate, Duration.ofDays(365));
         Article item1 = new Article(moneyBack1, warranty1);
 
         this.claimWarranty(item1);
+        this.claimWarranty(item1.withVisibilityDamage());
+        this.claimWarranty(item1.notOperational().withVisibilityDamage());
+        this.claimWarranty(item1.notOperational());
 
         // Replace nulls with proper objects
         // Implements the expected interface
         // Provide replacement behavior in methods
         Article item2 = new Article(VoidWarranty.VOID, Warranty.lifetime(sellingDate));
         this.claimWarranty(item2);
+        this.claimWarranty(item2.withVisibilityDamage().notOperational());
     }
 }
