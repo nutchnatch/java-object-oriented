@@ -3,6 +3,7 @@ package com.nullchecks;
 import java.time.LocalDate;
 import java.lang.Override;
 import java.lang.Runnable;
+import java.util.Optional;
 
 /**
  * Null object Pattern
@@ -31,5 +32,10 @@ public class VoidWarranty implements Warranty {
     @Override
     public Warranty on(LocalDate date) {
         return this;
+    }
+
+    @Override
+    public Optional<Warranty> filter(LocalDate date) {
+        return Optional.empty();
     }
 }

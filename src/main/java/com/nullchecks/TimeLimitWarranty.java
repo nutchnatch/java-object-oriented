@@ -1,7 +1,9 @@
 package com.nullchecks;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDate;
 import java.time.Duration;
+import java.util.Optional;
 
 public class TimeLimitWarranty implements Warranty{
     private LocalDate dateIssued;
@@ -32,6 +34,11 @@ public class TimeLimitWarranty implements Warranty{
                 :date.compareTo(this.getExpiredDate()) > 0 ? Warranty.VOID
                 :this;
 
+    }
+
+    @Override
+    public Optional<Warranty> filter(LocalDate date) {
+        return date.compareTo(this.dateIssued) >= 0 ? Optional.of(this) : Optional.empty();
     }
 
     public LocalDate getExpiredDate() {

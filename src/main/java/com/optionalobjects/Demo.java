@@ -18,7 +18,7 @@ public class Demo {
         LocalDate today = LocalDate.now();
         article.getMoneyBackGuarantee().on(today).claim(this::offerMoneyBack);
         article.getExpressWarranty().on(today).claim(this::offerRepair);
-        article.getExpressWarranty().on(today).claim(this::offerSensorRepair);
+        article.getExtendedWarranty().on(today).claim(this::offerSensorRepair);
 
         System.out.println("-----------------");
     }

@@ -1,6 +1,7 @@
 package com.nullchecks;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public interface Warranty {
 
@@ -31,6 +32,8 @@ public interface Warranty {
      * @return
      */
     Warranty on(LocalDate date);
+
+    Optional<Warranty> filter(LocalDate date);
 
     Warranty VOID = new VoidWarranty();
 

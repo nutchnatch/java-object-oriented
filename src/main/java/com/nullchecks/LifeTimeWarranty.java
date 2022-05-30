@@ -1,6 +1,7 @@
 package com.nullchecks;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * This class cannot be implemented as a null object because it has a very starting date
@@ -25,5 +26,10 @@ public class LifeTimeWarranty implements Warranty{
     @Override
     public Warranty on(LocalDate date) {
         return date.compareTo(this.issuedOn) < 0 ? Warranty.VOID : this;
+    }
+
+    @Override
+    public Optional<Warranty> filter(LocalDate date) {
+        return date.compareTo(this.issuedOn) >= 0 ? Optional.of(this) : Optional.empty();
     }
 }
