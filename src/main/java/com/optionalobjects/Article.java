@@ -57,6 +57,18 @@ public class Article {
         return new Article(this.moneyBackGuarantee, this.expressWarranty, this.effectiveExpressWarranty, sensor, extendedWarranty);
     }
 
+    /**
+     * We see that sensor object may be null, and so cause a NullPointerException
+     * We could apply the Null Object Pattern, adding a Part.MISSING object.
+     * But, it would count as an other sensor, and if we wanted to count the sensor, the counter would not be ok
+     * long sensorCount = items.stream().map(item -> item.getSensor()).filter(sensor -> sensor != null).count()
+     * Whether we want to know an object is real or dummy, substitute objects design is not good
+     * If an object must know the context in which it is used, then Null Object Pattern is not appropriate
+     * Sensors are material object, and we must operate on them, and soon or later we want to know if we have a sensor, or not
+     * This is not the case for VoidWarranty, because it is not a countable object, we just use is as behavior
+     * @param detectedOn
+     * @return
+     */
     public Article sensorNotOperational(LocalDate detectedOn) {
         return this.install(this.sensor.defective(detectedOn), this.extendedWarranty);
     }
